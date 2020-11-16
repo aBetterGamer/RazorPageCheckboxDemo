@@ -1,0 +1,38 @@
+﻿@page
+@model CheckboxDemo.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Checkbox Example</h1>
+    <br />
+    <form method="post">
+        <input asp-for="ParentId" type="hidden" />
+        <div class="form-group">
+            <label asp-for="ParentName"></label>
+            <input asp-for="ParentName" />
+            <span asp-validation-for="ParentName"></span>
+        </div>
+        <div class="form-group">
+            @for (int i = 0; i < Model.Children.Count; i++)
+            {
+                <div class="form-check">
+                    <input type="hidden" asp-for="Children[i].Value" />
+                    <input type="hidden" asp-for="Children[i].Text" />
+                    <input type="checkbox" class="form-check-input" asp-for="Children[i].Selected">
+                    <label class="form-check-label" asp-for="Children[i].Selected">@Model.Children[i].Text</label>
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" />
+        </div>
+    </form>
+    <br />
+    <hr />
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
